@@ -1,0 +1,414 @@
+/* Paleta de colores */
+:root {
+    --Dark_Slate_Grey: #355A5A;
+    --NotTooDark_Slate_Grey: #2D4D4D;
+    /* Dark Slate Grey */
+    --jasmine: #F4D06F;
+    /* Jasmine */
+    --SomeThing_White: #E5ECF4;
+    /* White i guess */
+    --Amber: #F8BE12;
+    /* Orange (web)*/
+    --blancopuro: #FFFFFF;
+    /* Blanco puro para textos más visibles */
+}
+
+/* General */
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #FFF8F0;
+    /* Floral white */
+    color: var(--Dark_Slate_Grey);
+    padding: 0;
+}
+
+/* Logo bar */
+/* General: Flexbox para el diseño principal */
+.logo-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    /* Permitir que los elementos se reorganicen */
+    background-color: var(--Dark_Slate_Grey);
+    padding: 10px 20px;
+    color: var(--blancopuro);
+    gap: 10px;
+    /* Espaciado entre elementos */
+}
+
+.logo-container {
+    flex: 1;
+}
+
+.logo {
+    height: 40px;
+}
+
+/* Contenedor del buscador */
+.search-bar {
+    display: flex;
+    align-items: center;
+    flex: 4;
+    max-width: 700px;
+    gap: 10px;
+    flex-wrap: wrap;
+    /* En pantallas pequeñas, se reordena */
+}
+
+.categories {
+    padding: 8px;
+    border: 2px solid var(--jasmine);
+    border-radius: 5px;
+    background-color: var(--jasmine);
+    color: var(--Dark_Slate_Grey);
+    flex: 1;
+    /* Se ajusta automáticamente en pantallas pequeñas */
+}
+
+.search-input {
+    flex: 2;
+    /* Se ajusta automáticamente en pantallas pequeñas */
+    padding: 10px;
+    border: 2px solid var(--jasmine);
+    border-radius: 5px;
+    background-color: white;
+    color: var(--Dark_Slate_Grey);
+}
+
+.search-button {
+    padding: 10px;
+    background-color: var(--SomeThing_White);
+    color: var(--blancopuro);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Botones de usuario */
+.user-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    /* Botones se reordenan en pantallas pequeñas */
+}
+
+.user-actions .button {
+    padding: 8px 10px;
+    background-color: var(--jasmine);
+    color: var(--Dark_Slate_Grey);
+    border: 2px solid var(--Dark_Slate_Grey);
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    flex: 1;
+    /* Se ajustan automáticamente */
+}
+
+.user-actions .button:hover {
+    background-color: var(--Amber);
+    color: var(--blancopuro);
+    border-color: var(--SomeThing_White);
+}
+
+.cart {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 1.5rem;
+    color: var(--blancopuro);
+}
+
+/* Tablets y pantallas medianas */
+@media (max-width: 768px) {
+    .search-bar {
+        flex-direction: column;
+        /* Los elementos se colocan en columna */
+        align-items: stretch;
+        /* Se ajustan al ancho completo */
+    }
+
+    .search-input,
+    .categories {
+        width: 100%;
+        /* Ancho completo */
+    }
+
+    .user-actions {
+        justify-content: center;
+        /* Centrar los botones en pantallas pequeñas */
+        width: 100%;
+    }
+}
+
+/* buscar otra dorma de responsible mañana xd pipipi´pipi */
+/* Móviles y pantallas pequeñas */
+@media (max-width: 480px) {
+    .logo {
+        height: 30px;
+        /* Logo más pequeño */
+    }
+
+    .search-button,
+    .user-actions .button {
+        padding: 6px 8px;
+        /* Botones más compactos */
+        font-size: 0.85rem;
+        /* Reducir tamaño de texto */
+    }
+
+    .search-bar {
+        gap: 5px;
+        /* Espaciado más pequeño */
+    }
+
+    .cart {
+        font-size: 1rem;
+        /* Ícono del carrito más pequeño */
+    }
+}
+
+
+/* Navigation bar */
+.nav-bar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--NotTooDark_Slate_Grey);
+    color: var(--blancopuro);
+    padding: 10px 0;
+    text-transform: uppercase;
+}
+
+.nav-bar a {
+    text-decoration: none;
+    color: var(--blancopuro);
+    padding: 5px 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.nav-bar a:hover {
+    background-color: var(--Amber);
+    border-radius: 5px;
+    color: var(--Dark_Slate_Grey);
+}
+
+
+/* Hero Section */
+.hero {
+    background-color: var(--SomeThing_White);
+    background: linear-gradient(rgba(155, 148, 148, 0.267), rgba(131, 125, 125, 0.267)), url(Tienda_heroContent.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 870px;
+    display: flex;
+    flex-direction: column;
+}
+
+.hero_content {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: auto;
+    margin-top: 80px;
+    text-align: center;
+}
+
+.hero_content h1 {
+    font-family: "Coda", system-ui;
+    color: #191919;
+    font-size: 4rem;
+    font-weight: 750;
+    line-height: 1.2;
+}
+
+.hero_content a {
+    background-color: var(--jasmine);
+    width: 200px;
+    padding: 15px;
+    font-family: "Coda", system-ui;
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.hero_content a:hover {
+    background-color: var(--Dark_Slate_Grey);
+}
+
+/* Newsletter */
+.newsletter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    /* Reduce el espacio entre los elementos */
+    background-color: var(--SomeThing_White);
+    /* Fondo del contenedor */
+    padding: 20px;
+    /* Espaciado interno */
+    color: white;
+    /* Color del texto */
+    font-family: Arial, sans-serif;
+}
+
+.newsletter .titulo {
+    color: #FFF8F0;
+    font-weight: bold;
+}
+
+.newsletter input {
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+}
+
+.newsletter button {
+    background-color: var(--Dark_Slate_Grey);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.newsletter button:hover {
+    background-color: var(--jasmine);
+    color: black;
+    transition: background-color 0.4s ease;
+}
+
+/* Sección Productos */
+.section {
+    margin: 40px auto;
+    text-align: center;
+}
+
+.section h2 {
+    font-size: 2.5rem;
+    color: var(--Dark_Slate_Grey);
+    margin-bottom: 20px;
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.product-card {
+    background-color: #FFF;
+    border: 1px solid var(--Amber);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.product-card h3 {
+    font-size: 1.5rem;
+    color: var(--Dark_Slate_Grey);
+    margin: 15px 0;
+}
+
+.product-card p {
+    font-size: 1rem;
+    color: #666;
+    margin: 0 15px 15px;
+}
+
+.product-card .button {
+    display: inline-block;
+    background-color: var(--jasmine);
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.product-card .button:hover {
+    background-color: var(--Dark_Slate_Grey);
+}
+
+/* Sección Donaciones */
+.donation {
+    background-color: var(--Amber);
+    padding: 30px;
+    text-align: center;
+    border-radius: 10px;
+    margin: 40px 20px;
+    color: white;
+}
+
+.donation p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.donation .button {
+    background-color: var(--SomeThing_White);
+    color: #191919;
+    padding: 15px 30px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.donation .button:hover {
+    background-color: var(--NotTooDark_Slate_Grey);
+    color: white;
+}
+
+/* Botón centrado */
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.button {
+    display: inline-block;
+    background-color: var(--jasmine);
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 15px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.button:hover {
+    background-color: var(--Dark_Slate_Grey);
+    transform: scale(1.05);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro e Ingreso</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #392F5A; /* Space cadet */
+            color: #F4D06F; /* Jasmine */
+        }
+
+        .container {
+            background-color: #2D4D4D; /* NotTooDark Slate Grey */
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            color: #FF8811; /* Orange */
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input {
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #9DD9D2; /* Tiffany Blue */
+            font-size: 1rem;
+            background-color: #F4F4F4; /* Blanco suave */
+        }
+
+        input:focus {
+            outline: 2px solid #FF8811; /* Enfasis */
+        }
+
+        button {
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            background-color: #FF8811; /* Orange */
+            color: #392F5A; /* Space cadet */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #F4D06F; /* Jasmine */
+        }
+
+        .toggle {
+            text-align: center;
+            margin-top: 20px;
+            color: #9DD9D2; /* Tiffany Blue */
+        }
+
+        .toggle a {
+            color: #FF8811; /* Orange */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .toggle a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="login-container">
+        <h2>Iniciar Sesión</h2>
+        <form id="login-form">
+            <input type="email" id="login-email" placeholder="Correo electrónico" required>
+            <input type="password" id="login-password" placeholder="Contraseña" required>
+            <button type="button" onclick="login()">Ingresar</button>
+        </form>
+        <div class="toggle">
+            ¿No tienes una cuenta? <a href="registro.html?action=register">Regístrate</a>
+        </div>
+    </div>
+
+    <div class="container" id="register-container" style="display: none;">
+        <h2>Registrarse</h2>
+        <form id="register-form">
+            <input type="text" id="register-username" placeholder="Nombre de usuario" required>
+            <input type="email" id="register-email" placeholder="Correo electrónico" required>
+            <input type="password" id="register-password" placeholder="Contraseña" required>
+            <button type="button" onclick="register()">Registrarse</button>
+        </form>
+        <div class="toggle">
+            ¿Ya tienes una cuenta? <a href="registro.html?action=login">Inicia sesión</a>
+        </div>
+    </div>
+
+    <script>
+        // Función para cambiar entre login y registro según la URL
+        const loginContainer = document.getElementById('login-container');
+        const registerContainer = document.getElementById('register-container');
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const action = urlParams.get('action');
+
+        if (action === 'register') {
+            loginContainer.style.display = 'none';
+            registerContainer.style.display = 'block';
+        } else if (action === 'login') {
+            registerContainer.style.display = 'none';
+            loginContainer.style.display = 'block';
+        }
+
+        // Función de login
+        async function login() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert(data.message);
+                    // Aquí puedes redirigir al usuario a otra página
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                alert('Error al iniciar sesión.');
+                console.error(error);
+            }
+        }
+
+        // Función de registro
+        async function register() {
+            const username = document.getElementById('register-username').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+
+            try {
+                const response = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert(data.message);
+                    // Redirigir al usuario a la página de login
+                    window.location.href = 'registro.html?action=login';
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                alert('Error al registrarse.');
+                console.error(error);
+            }
+        }
+    </script>
+</body>
+</html>
