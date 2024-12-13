@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Productos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        form label {
+            display: block;
+            font-size: 14px;
+            margin: 10px 0 5px;
+            color: #555;
+        }
+        form input, form textarea, form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .product-details {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .product-details img {
+            max-width: 200px;
+            border-radius: 8px;
+        }
+        .product-details div {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Formulario para agregar productos (solo para vendedores) -->
+    <div class="container" id="add-product-container" style="display: none;">
+        <h2>Agregar Producto</h2>
+        <form id="add-product-form">
+            <label for="product-name">Nombre del producto:</label>
+            <input type="text" id="product-name" placeholder="Ingrese el nombre del producto" required>
+
+            <label for="product-price">Precio:</label>
+            <input type="number" id="product-price" placeholder="Ingrese el precio del producto" required>
+
+            <label for="product-category">Categoría:</label>
+            <select id="product-category" required>
+                <option value="">Seleccione una categoría</option>
+                <option value="frutas">Frutas y Verduras</option>
+                <option value="lacteos">Lácteos y Huevos</option>
+                <option value="bebidas">Bebidas y Snacks</option>
+                <!-- Más opciones -->
+            </select>
+
+            <label for="product-description">Descripción:</label>
+            <textarea id="product-description" placeholder="Describa el producto..." rows="4" required></textarea>
+
+            <label for="product-image">URL de la imagen:</label>
+            <input type="text" id="product-image" placeholder="Ingrese la URL de la imagen" required>
+
+            <button type="button" onclick="addProduct()">Agregar Producto</button>
+        </form>
+    </div>
+
+    <!-- Detalles del producto -->
+    <div class="container" id="product-details-container" style="display: none;">
+        <h2>Detalles del Producto</h2>
+        <div class="product-details">
+            <img id="product-image-preview" src="" alt="Imagen del producto">
+            <div>
+                <h3 id="product-name-preview"></h3>
+                <p><strong>Precio:</strong> $<span id="product-price-preview"></span></p>
+                <p><strong>Categoría:</strong> <span id="product-category-preview"></span></p>
+                <p><strong>Descripción:</strong></p>
+                <p id="product-description-preview"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mostrar/ocultar el formulario de agregar productos para vendedores
+        const userRole = "vendedor"; // Simulación de rol (cambiar dinámicamente según el backend)
+        if (userRole === "vendedor") {
+            document.getElementById('add-product-container').style.display = 'block';
+        }
+
+        // Simulación de agregar producto (puedes conectarlo con tu backend)
+        function addProduct() {
+            const name = document.getElementById('product-name').value;
+            const price = document.getElementById('product-price').value;
+            const category = document.getElementById('product-category').value;
+            const description = document.getElementById('product-description').value;
+            const image = document.getElementById('product-image').value;
+
+            // Mostrar en detalles
+            document.getElementById('product-image-preview').src = image;
+            document.getElementById('product-name-preview').textContent = name;
+            document.getElementById('product-price-preview').textContent = price;
+            document.getElementById('product-category-preview').textContent = category;
+            document.getElementById('product-description-preview').textContent = description;
+
+            // Mostrar detalles del producto
+            document.getElementById('product-details-container').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

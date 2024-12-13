@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Productos excedentes y donaciones para reducir el desperdicio alimentario. Compra productos a punto de vencer y ayuda a un banco de alimentos.">
     <title>Productos Excedentes y Donaciones</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -10,27 +11,39 @@
     <main>
         <header>
             <div class="logo-bar">
+                <!-- Logo Container -->
                 <div class="logo-container">
-                    <img src="logo.png" alt="Logo" class="logo">
+                    <img src="logo.png" alt="Logo de Productos Excedentes" class="logo">
                 </div>
-                <div class="search-bar">
-                    <select class="categories">
-                        <option>Todas las categorías</option>
-                        <option>Frutas y Verduras</option>
-                        <option>Lácteos</option>
+        
+                <!-- Search Bar -->
+                <form role="search" class="search-bar">
+                    <select class="categories" aria-label="Seleccionar categoría">
+                        <option value="all">Todas las categorías</option>
+                        <option value="frutas-y-verduras">Frutas y Verduras</option>
+                        <option value="lacteos">Lácteos</option>
                         <!-- Agrega más categorías aquí -->
                     </select>
-                    <input type="text" placeholder="¿Qué estás buscando?" class="search-input">
-                    <button class="search-button">🔍</button>
-                    <div class="user-actions">
-                        <a href="registro.html?action=register" class="button">Regístrate</a>
-                        <a href="registro.html?action=login" class="button">Ingresar</a>
+                    <input type="search" placeholder="¿Qué estás buscando?" class="search-input" aria-label="Buscar productos">
+                    <button type="submit" class="search-button" aria-label="Buscar">🔍</button>
+                </form>
+        
+                <!-- User Actions (Register / Login) -->
+                <div class="user-actions">
+                    <a href="registro.html?action=register" class="button" aria-label="Registrarse">Regístrate</a>
+                    <a href="registro.html?action=login" class="button" aria-label="Iniciar sesión">Ingresar</a>
+                </div>
+        
+                <div id="cart-icon" aria-label="Carrito de compras">
+                    🛒 <span class="cart-count">0</span>
+                    <div id="cart-items">
+                        <h3>Carrito de Compras</h3>
+                        <ul id="cart-list"></ul>
+                        <p>Total: $<span id="cart-total">0.00</span></p>
                     </div>
-    </div>
-    <div class="cart">
-        🛒
-    </div>
-            </div>
+                </div>
+                
+            <!-- Navigation Bar -->
             <nav class="nav-bar">
                 <a href="#">Marca Vaquita</a>
                 <a href="#">Carnes, Pollo y Pescado</a>
@@ -40,13 +53,10 @@
                 <a href="#">Bebidas y Snacks</a>
                 <a href="#">Licores</a>
                 <a href="#">Ofertas</a>
-                <a href="#">Regístrate</a>
-                <a href="#">Ingresar</a>
             </nav>
         </header>
         
 
-        <!-- Sección Hero -->
         <section class="hero">
             <div class="hero_content">
                 <h1>Reducimos el Desperdicio</h1>
@@ -56,73 +66,42 @@
             </div>
         </section>
 
-        <div id="productos" class="container">
-            <section class="section">
-                <h2>Productos a Punto de Vencer</h2>
-                <div class="products">
-                    <div class="product-card">
-                        <img src="https://via.placeholder.com/300x200" alt="Producto 1">
-                        <h3>Producto 1</h3>
-                        <p>Descripción breve del producto.</p>
-                        <a href="#" class="button">Comprar</a>
-                    </div>
-                    <div class="product-card">
-                        <img src="https://via.placeholder.com/300x200" alt="Producto 2">
-                        <h3>Producto 2</h3>
-                        <p>Descripción breve del producto.</p>
-                        <a href="#" class="button">Comprar</a>
-                    </div>
-                    <div class="product-card">
-                        <img src="https://via.placeholder.com/300x200" alt="Producto 3">
-                        <h3>Producto 3</h3>
-                        <p>Descripción breve del producto.</p>
-                        <a href="#" class="button">Comprar</a>
-                    </div>
-                    <div class="product-card">
-                        <img src="https://via.placeholder.com/300x200" alt="Producto 4">
-                        <h3>Producto 4</h3>
-                        <p>Descripción breve del producto.</p>
-                        <a href="#" class="button">Comprar</a>
-                    </div>
-                    <div class="product-card">
-                        <img src="https://via.placeholder.com/300x200" alt="Producto 2">
-                        <h3>Producto 2</h3>
-                        <p>Descripción breve del producto.</p>
-                        <a href="#" class="button">Comprar</a>
-                    </div>
-                    <div class="product-card">
-                        <img src="https://via.placeholder.com/300x200" alt="Producto 2">
-                        <h3>Producto 2</h3>
-                        <p>Descripción breve del producto.</p>
-                        <a href="#" class="button">Comprar</a>
-                    </div>
-                    <div class="product-card">
-                        <img src="https://via.placeholder.com/300x200" alt="Producto 2">
-                        <h3>Producto 2</h3>
-                        <p>Descripción breve del producto.</p>
-                        <a href="#" class="button">Comprar</a>
-                    </div>
-                </div>
-            </section>
-        </div>
-        <!-- Donaciones -->
-        <div id="donaciones" class="container">
-            <section class="section">
-                <h2>Ayuda a un Banco de Alimentos</h2>
-                <div class="donation">
-                    <p>Con tu ayuda podemos reducir el desperdicio de alimentos y apoyar a quienes más lo necesitan.</p>
-                    <a href="#" class="button">Donar Ahora</a>
-                </div>
-            </section>
-        </div>
+        <section id="productos" class="container">
+            <h2>Productos a Punto de Vencer</h2>
+            <div class="products">
+                <!-- Los productos se cargarán aquí dinámicamente -->
+            </div>
+        </section>
 
-        <!-- Newsletter -->
-        <div class="newsletter">
-            <span class="titulo">Suscríbete a nuestro boletín:</span>
-            <input type="email" placeholder="Introduce tu email">
-            <button>Enviar</button>
+        <div id="productModal" class="modal" aria-hidden="true">
+            <div class="modal-content">
+                <button class="close" aria-label="Cerrar">&times;</button>
+                <div id="productDetails"></div>
+            </div>
         </div>
+        
+        <section id="donaciones" class="container">
+            <h2>Ayuda a un Banco de Alimentos</h2>
+            <div class="donation">
+                <p>Con tu ayuda podemos reducir el desperdicio de alimentos y apoyar a quienes más lo necesitan.</p>
+                <a href="#" class="button" aria-label="Hacer una donación">Donar Ahora</a>
+            </div>
+        </section>
+
+        <section class="newsletter">
+            <h2 class="visually-hidden">Suscripción al boletín</h2>
+            <form>
+                <label for="newsletter-email" class="titulo">Suscríbete a nuestro boletín:</label>
+                <input type="email" id="newsletter-email" placeholder="Introduce tu email" aria-label="Introduce tu correo electrónico">
+                <button type="submit" aria-label="Enviar boletín">Enviar</button>
+            </form>
+        </section>
     </main>
+
+    <footer>
+        <p>&copy; 2023 Productos Excedentes. Todos los derechos reservados.</p>
+    </footer>
+
+    <script type="module" src="app.js"></script>
 </body>
 </html>
-

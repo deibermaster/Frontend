@@ -38,7 +38,12 @@
             gap: 15px;
         }
 
-        input {
+        label {
+            font-size: 1rem;
+            color: #F4D06F; /* Jasmine */
+        }
+
+        input, select {
             padding: 12px;
             border-radius: 5px;
             border: 1px solid #9DD9D2; /* Tiffany Blue */
@@ -46,7 +51,7 @@
             background-color: #F4F4F4; /* Blanco suave */
         }
 
-        input:focus {
+        input:focus, select:focus {
             outline: 2px solid #FF8811; /* Enfasis */
         }
 
@@ -84,24 +89,33 @@
     </style>
 </head>
 <body>
+    <!-- Contenedor de inicio de sesión -->
     <div class="container" id="login-container">
         <h2>Iniciar Sesión</h2>
         <form id="login-form">
-            <input type="email" id="login-email" placeholder="Correo electrónico" required>
-            <input type="password" id="login-password" placeholder="Contraseña" required>
-            <button type="button" onclick="login()">Ingresar</button>
+            <label for="login-email">Email:</label>
+            <input type="email" id="login-email" name="email" required>
+            <label for="login-password">Contraseña:</label>
+            <input type="password" id="login-password" name="password" required>
+            <button type="submit" onclick="login(event)">Iniciar sesión</button>
         </form>
         <div class="toggle">
             ¿No tienes una cuenta? <a href="registro.html?action=register">Regístrate</a>
         </div>
     </div>
 
+    <!-- Contenedor de registro -->
     <div class="container" id="register-container" style="display: none;">
         <h2>Registrarse</h2>
         <form id="register-form">
             <input type="text" id="register-username" placeholder="Nombre de usuario" required>
             <input type="email" id="register-email" placeholder="Correo electrónico" required>
             <input type="password" id="register-password" placeholder="Contraseña" required>
+            <select id="register-role" required>
+                <option value="">Selecciona un rol</option>
+                <option value="usuario">Usuario</option>
+                <option value="vendedor">Vendedor</option>
+            </select>
             <button type="button" onclick="register()">Registrarse</button>
         </form>
         <div class="toggle">
@@ -110,10 +124,9 @@
     </div>
 
     <script>
-        // Función para cambiar entre login y registro según la URL
+        // Cambiar entre login y registro según la URL
         const loginContainer = document.getElementById('login-container');
         const registerContainer = document.getElementById('register-container');
-
         const urlParams = new URLSearchParams(window.location.search);
         const action = urlParams.get('action');
 
@@ -125,54 +138,65 @@
             loginContainer.style.display = 'block';
         }
 
-        // Función de login
-        async function login() {
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
+        // Función para el login
+        // Función para el login
+async function login(event) {
+    event.preventDefault();  // Prevenir el comportamiento por defecto del formulario
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
 
-            try {
-                const response = await fetch('/api/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ email, password })
-                });
+    try {
+        const response = await fetch('http://127.0.0.1:3000/api/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
+        });
 
-                const data = await response.json();
+        const data = await response.json();
 
-                if (response.ok) {
-                    alert(data.message);
-                    // Aquí puedes redirigir al usuario a otra página
-                } else {
-                    alert(data.message);
-                }
-            } catch (error) {
-                alert('Error al iniciar sesión.');
-                console.error(error);
-            }
+        if (response.ok) {
+            // Guardar el token en el almacenamiento local
+            localStorage.setItem('authToken', data.token);
+            document.getElementById('login-form').reset(); 
+            // Redirigir a la página deseada después del login
+            window.location.href = 'http://127.0.0.1:5500/Frontend/';
+        } else {
+            alert(data.message);  // Mostrar el mensaje de error si lo hay
         }
+    } catch (error) {
+        alert('Error al iniciar sesión.');
+        console.error(error);
+    }
+}
 
-        // Función de registro
+        // Función para el registro
         async function register() {
             const username = document.getElementById('register-username').value;
             const email = document.getElementById('register-email').value;
             const password = document.getElementById('register-password').value;
+            const role = document.getElementById('register-role').value;
+
+            if (!role) {
+                alert('Por favor, selecciona un rol.');
+                return;
+            }
 
             try {
-                const response = await fetch('/api/register', {
+                const response = await fetch('http://127.0.0.1:3000/api/auth/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ username, email, password })
+                    body: JSON.stringify({ username, email, password, role })
                 });
 
                 const data = await response.json();
 
                 if (response.ok) {
                     alert(data.message);
-                    // Redirigir al usuario a la página de login
+                    document.getElementById('register-form').reset();
                     window.location.href = 'registro.html?action=login';
                 } else {
                     alert(data.message);
