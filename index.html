@@ -28,20 +28,30 @@
                     <button type="submit" class="search-button" aria-label="Buscar">🔍</button>
                 </form>
         
-                <!-- User Actions (Register / Login) -->
-                <div class="user-actions">
-                    <a href="registro.html?action=register" class="button" aria-label="Registrarse">Regístrate</a>
-                    <a href="registro.html?action=login" class="button" aria-label="Iniciar sesión">Ingresar</a>
-                </div>
+               <!-- User Actions (Register / Login) y Perfil (dinámico) -->
+<div class="user-actions">
+    <div id="auth-buttons">
+        <!-- Los botones se mostrarán dinámicamente -->
+        <a href="registro.html?action=register" class="button" aria-label="Registrarse">Regístrate</a>
+        <a href="registro.html?action=login" class="button" aria-label="Iniciar sesión">Ingresar</a>
+    </div>
+    <div id="profile-section" style="display: none;">
+        <img src="perfil-icon.png" alt="Perfil" class="profile-icon">
+        <button id="logout-button" class="button" aria-label="Cerrar sesión">Cerrar sesión</button>
+    </div>
+</div>
+
         
                 <div id="cart-icon" aria-label="Carrito de compras">
                     🛒 <span class="cart-count">0</span>
-                    <div id="cart-items">
+                    <div id="cart-items" class="cart-hidden">
+                        <button class="close-cart" aria-label="Cerrar carrito">&times;</button>
                         <h3>Carrito de Compras</h3>
                         <ul id="cart-list"></ul>
                         <p>Total: $<span id="cart-total">0.00</span></p>
                     </div>
                 </div>
+                
                 
             <!-- Navigation Bar -->
             <nav class="nav-bar">
@@ -75,7 +85,6 @@
 
         <div id="productModal" class="modal" aria-hidden="true">
             <div class="modal-content">
-                <button class="close" aria-label="Cerrar">&times;</button>
                 <div id="productDetails"></div>
             </div>
         </div>
